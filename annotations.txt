@@ -1,0 +1,3 @@
+transformar projeto para TS
+  criar o arquivo tsconfig.json
+  npx expo start (recohece o TS e instala as dependencias)
