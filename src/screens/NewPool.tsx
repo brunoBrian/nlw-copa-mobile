@@ -1,24 +1,30 @@
-import { Center, Icon, Text, VStack } from 'native-base'
+import { Center, Heading, Icon, Text, VStack } from 'native-base'
 import { Fontisto } from '@expo/vector-icons'
 
 import Logo from '../assets/logo.svg'
 import { Button } from '../components/Button'
+import { Header } from '../components/Header'
+import { Input } from '../components/Input'
 
 export function NewPool() {
   return (
-    <VStack flex={1} bgColor='gray.900' padding={7}>
-      <Logo />
+    <VStack flex={1} bgColor='gray.900'>
+      <Header title='Criar novo bolão' />
 
-      <Button 
-        mt={12}
-        type='secondary'
-        title='Entrar com o Google' 
-        leftIcon={<Icon as={Fontisto} name='google' color='white' size='md' />}
-      />
+      <VStack mt={8} mx={5} alignItems='center'>
+        <Logo />
 
-      <Text textAlign='center' color='white' mt={4}>
-        Não utilizamos nenhuma informação além {'\n'} do seu e-mail para criação de sua conta.
-      </Text>
+        <Heading fontFamily='heading' color='white' fontSize='xl' my={8} textAlign='center'>
+          Crie seu próprio bolão da copa e compartilhe entre amigos!
+        </Heading>
+
+        <Input placeholder='Qual nome do seu bolão?' mb={2} />
+        <Button title='CRIAR MEU BOLÃO' />
+
+        <Text color='gray.200' fontSize='sm' textAlign='center' px={10} mt={4}>
+          Após criar seu bolão, você receberá um código único que poderá usar para convidar outras pessoas.
+        </Text>
+      </VStack>
     </VStack>
   )
 }
