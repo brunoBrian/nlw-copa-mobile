@@ -3,10 +3,8 @@ import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@
 
 import { THEME } from './src/styles/theme';
 import { Loading } from './src/components/Loadig';
-import { SignIn } from './src/screens/SignIn';
+import { SignIn, FindPool, NewPool, Pools } from './src/screens/';
 import { AuthContextProvider } from './src/context/Auth';
-import { NewPool } from './src/screens/NewPool';
-import { FindPool } from './src/screens/FindPool';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_500Medium, Roboto_700Bold })
@@ -20,7 +18,7 @@ export default function App() {
           translucent
         />
 
-        {fontsLoaded ?  <FindPool /> : <Loading />}
+        {fontsLoaded ?  <Pools /> : <Loading />}
       </AuthContextProvider>
     </NativeBaseProvider>
   );

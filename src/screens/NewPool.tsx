@@ -1,5 +1,4 @@
-import { Center, Heading, Icon, Text, VStack } from 'native-base'
-import { Fontisto } from '@expo/vector-icons'
+import { Heading, Text, VStack } from 'native-base'
 
 import Logo from '../assets/logo.svg'
 import { Button } from '../components/Button'
