@@ -6,7 +6,7 @@ import { Button } from '../components/Button'
 import { useAuth } from '../hooks/useAuth'
 
 export function SignIn() {
-  const {user, signIn} = useAuth()
+  const { signIn, isUserLoading } = useAuth()
   return (
     <Center flex={1} bgColor='gray.900' padding={7}>
       <Logo />
@@ -17,6 +17,8 @@ export function SignIn() {
         title='Entrar com o Google' 
         leftIcon={<Icon as={Fontisto} name='google' color='white' size='md' />}
         onPress={signIn}
+        isLoading={isUserLoading}
+        _loading={{ _spinner: { color: 'white' } }}
       />
 
       <Text textAlign='center' color='white' mt={4}>
