@@ -1,10 +1,10 @@
-import { Text,  VStack, Icon, useToast, FlatList } from 'native-base'
+import {  VStack, Icon, useToast, FlatList } from 'native-base'
 import { Octicons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import { Button } from '../components/Button'
 import { Header } from '../components/Header'
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { api } from '../services/api'
 import { PoolCard, PoolCardPros } from '../components/PoolCard'
 import { Loading } from '../components/Loadig'
@@ -36,9 +36,9 @@ export function Pools() {
     }
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     fetchPools()
-  }, [])
+  }, []))
   
 
   return (
