@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Share } from 'react-native'
 
 import { EmptyMyPoolList } from '../components/EmptyMyPoolList'
+import { Guesses } from '../components/Guesses'
 import { Header } from '../components/Header'
 import { Loading } from '../components/Loadig'
 import { Option } from '../components/Option'
@@ -36,7 +37,7 @@ export function DetailsPool() {
       console.log(err);
 
       toast.show({
-        title: 'Erro ao carregar o bolão',
+        title: 'Não foi possível carregar o bolão',
         placement: 'top',
         bgColor: 'red.500'
       })
@@ -64,7 +65,7 @@ export function DetailsPool() {
       <Header title={poolDetails?.title} onShare={handleCodeShare} showBackButton showShareButton />
 
       {poolDetails?._count?.participants > 0 ? (
-        <VStack px={5} flex={1}>
+        <VStack px={5}>
           <PoolHeader data={poolDetails} />
 
           <HStack bg='gray.800' p={1} rounded='sm' mb={5}>
@@ -81,6 +82,8 @@ export function DetailsPool() {
           </HStack> 
         </VStack>
       ) : <EmptyMyPoolList code={poolDetails?.code} onShare={handleCodeShare} />}
+
+      <Guesses poolId={poolDetails?.id} />
     </VStack>
   )
 }
