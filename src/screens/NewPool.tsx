@@ -43,7 +43,6 @@ export function NewPool() {
     } finally {
       setIsLoading(false)
     }
-
   }
 
   return (

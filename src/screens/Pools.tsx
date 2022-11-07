@@ -1,12 +1,45 @@
-import { Text,  VStack, Icon } from 'native-base'
+import { Text,  VStack, Icon, useToast, FlatList } from 'native-base'
 import { Octicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
 import { Button } from '../components/Button'
 import { Header } from '../components/Header'
+import { useEffect, useState } from 'react'
+import { api } from '../services/api'
+import { PoolCard, PoolCardPros } from '../components/PoolCard'
+import { Loading } from '../components/Loadig'
+import { EmptyPoolList } from '../components/EmptyPoolList'
 
 export function Pools() {
   const { navigate } = useNavigation()
+  const toast = useToast()
+
+  const [pools, setPools] = useState<PoolCardPros[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  async function fetchPools() {
+    try {
+      setIsLoading(true)
+
+      const { data } = await api.get('/pools')
+
+      setPools(data)
+    } catch(err) {
+      console.log(err)
+      toast.show({
+        title: 'Não foi possivel carregar os bolões',
+        placement: 'top',
+        bgColor: 'red.500'
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchPools()
+  }, [])
+  
 
   return (
     <VStack flex={1} bgColor='gray.900'>
@@ -20,11 +53,17 @@ export function Pools() {
         />
       </VStack>
 
-      <Text color='gray.200' fontSize='sm' textAlign='center' px={10}>
-        Você ainda não está participando de nenhum bolão, que tal {' '}
-        <Text color='yellow.500' onPress={() => {}} underline>buscar um por código</Text> ou {' '}
-        <Text color='yellow.500' onPress={() => {}} underline>criar um novo</Text>?
-      </Text>
+      {isLoading ? <Loading /> : 
+        <FlatList
+          data={pools}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => <PoolCard data={item} />}
+          px={5}
+          showsVerticalScrollIndicator={false}
+          _contentContainerStyle={{ pb: 10, mt: 5 }}
+          ListEmptyComponent={<EmptyPoolList />}
+        />
+      }
     </VStack>
   )
 }
