@@ -36,10 +36,12 @@ export function PoolHeader({ data }: Props) {
         </HStack>
       </VStack>
 
-      <Participants
-        count={data._count?.participants}
-        participants={data.participants}
-      />
+      {data._count?.participants > 0 && 
+        <Participants
+          count={data._count?.participants}
+          participants={data.participants}
+        />
+      }
     </HStack>
   );
 }

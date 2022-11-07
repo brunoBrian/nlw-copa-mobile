@@ -64,26 +64,27 @@ export function DetailsPool() {
     <VStack flex={1} bgColor='gray.900'>
       <Header title={poolDetails?.title} onShare={handleCodeShare} showBackButton showShareButton />
 
-      {poolDetails?._count?.participants > 0 ? (
-        <VStack px={5}>
-          <PoolHeader data={poolDetails} />
+      <VStack px={5}>
+        <PoolHeader data={poolDetails} />
 
-          <HStack bg='gray.800' p={1} rounded='sm' mb={5}>
-            <Option 
-              title='Seus palpites'
-              isSelected={optionSelected === '1'} 
-              onPress={() => setOptionSelected('1')}
+        <HStack bg='gray.800' p={1} rounded='sm' mb={5}>
+          <Option 
+            title='Seus palpites'
+            isSelected={optionSelected === '1'} 
+            onPress={() => setOptionSelected('1')}
             />
-            <Option 
-              title='Ranking do grupo'
-              isSelected={optionSelected === '2'} 
-              onPress={() => setOptionSelected('2')}
+          <Option 
+            title='Ranking do grupo'
+            isSelected={optionSelected === '2'} 
+            onPress={() => setOptionSelected('2')}
             />
-          </HStack> 
-        </VStack>
+        </HStack> 
+      </VStack>
+
+      {poolDetails?._count?.participants > 0 ? (
+          <Guesses poolId={poolDetails?.id} />
       ) : <EmptyMyPoolList code={poolDetails?.code} onShare={handleCodeShare} />}
 
-      <Guesses poolId={poolDetails?.id} />
     </VStack>
   )
 }
