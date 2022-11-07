@@ -61,6 +61,7 @@ export function NewPool() {
           mb={2} 
           onChangeText={setTitle} 
           value={title}
+          autoCapitalize="characters"
         />
         <Button 
           title='CRIAR MEU BOLÃO' 
