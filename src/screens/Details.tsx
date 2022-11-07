@@ -1,11 +1,10 @@
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { Heading,  HStack,  useToast,  VStack } from 'native-base'
+import { useRoute } from '@react-navigation/native'
+import { HStack,  useToast,  VStack } from 'native-base'
 import { useEffect, useState } from 'react'
+import { Share } from 'react-native'
 
-import { Button } from '../components/Button'
 import { EmptyMyPoolList } from '../components/EmptyMyPoolList'
 import { Header } from '../components/Header'
-import { Input } from '../components/Input'
 import { Loading } from '../components/Loadig'
 import { Option } from '../components/Option'
 import { PoolCardPros } from '../components/PoolCard'
@@ -46,6 +45,12 @@ export function DetailsPool() {
     }
   }
 
+  async function handleCodeShare() {
+    Share.share({
+      message: poolDetails.code
+    })
+  }
+
   useEffect(() => {
     fetchPoolDetail()
   }, [id])
@@ -56,7 +61,7 @@ export function DetailsPool() {
 
   return (
     <VStack flex={1} bgColor='gray.900'>
-      <Header title={id} showBackButton showShareButton />
+      <Header title={poolDetails?.title} onShare={handleCodeShare} showBackButton showShareButton />
 
       {poolDetails?._count?.participants > 0 ? (
         <VStack px={5} flex={1}>
@@ -75,7 +80,7 @@ export function DetailsPool() {
             />
           </HStack> 
         </VStack>
-      ) : <EmptyMyPoolList code={poolDetails?.code} />}
+      ) : <EmptyMyPoolList code={poolDetails?.code} onShare={handleCodeShare} />}
     </VStack>
   )
 }
