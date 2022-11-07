@@ -25,7 +25,7 @@ export function AuthContextProvider({ children }) {
 
   // promptAsync define quando vai abrir fluxo de autenticação
   const [request, response, promptAsync] = GoogleAuth.useAuthRequest({
-    clientId: '169078025695-4f8i25ovt03geem019fefsj39vfm55rg.apps.googleusercontent.com',
+    clientId: process.env.CLIENT_ID,
     redirectUri: AuthSession.makeRedirectUri({useProxy: true}), 
     scopes: ['profile', 'email']
   })
